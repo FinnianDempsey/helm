@@ -9,6 +9,6 @@ entries:
     name: hello-world
     type: application
     urls:
-    - https://finniandempsey.github.com/helm/hello-world-0.1.3.tgz
+    - https://finniandempsey.github.io/helm/hello-world-0.1.3.tgz
     version: 0.1.3
 generated: "2024-03-08T15:35:46.58426+10:00"
