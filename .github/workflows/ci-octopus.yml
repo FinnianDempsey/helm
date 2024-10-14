@@ -42,7 +42,7 @@ jobs:
         uses: OctopusDeploy/login@v1.0.1
         with: 
           server: https://octopus-operations.octopus.app
-          api_key: ${{ secrets.OCTOPUS_API_KEY }}
+          service_account_id: ${{ secrets.OCTOPUSSERVICEACCOUNT }}
 
       - name: Push Package to Octopus Deploy
         uses: OctopusDeploy/push-package-action@v3.0.4
