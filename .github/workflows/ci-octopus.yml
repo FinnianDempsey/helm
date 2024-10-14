@@ -32,24 +32,35 @@ jobs:
           # Version of helm
           version: 3.16.1                    
 
-      # Helm Package
+      # Helm Create Package
       - name: Run Helm Package
+        id: pack
         run: |
           echo "Launching helm package.. ⎈"
           helm package $GITHUB_WORKSPACE/helm-hello-world
+          echo "helm_version=$(helm show chart ./helm-hello-world | awk '/version/ {print $2}')" >> $GITHUB_OUTPUT
 
       # Octopus OIDC login
       - name: Login to Octopus Deploy
-        # You may pin to the exact commit or the version.
         uses: OctopusDeploy/login@v1.0.1
         with: 
           server: https://octopus-operations.octopus.app
           service_account_id: ${{ secrets.OCTOPUSSERVICEACCOUNT }}
-
+      
+      # Octopus Build Info
+      - name: Push Build Information to Octopus Deploy
+        uses: OctopusDeploy/push-build-information-action@v3
+        with:
+          packages: 
+            hello-world
+          version: ${{ steps.pack.outputs.helm_version }}
+          overwrite_mode: OverwriteExisting
+          
+      # Octopus Push Package
       - name: Push Package to Octopus Deploy
         uses: OctopusDeploy/push-package-action@v3
         with:
           packages: 
-            hello-world-*.tgz
+            hello-world-${{ steps.pack.outputs.helm_version }}.tgz
           space: "Finn D"
           overwrite_mode: "OverwriteExisting"
