@@ -54,6 +54,7 @@ jobs:
           packages: 
             hello-world
           version: ${{ steps.pack.outputs.helm_version }}
+          space: "Finn D"
           overwrite_mode: OverwriteExisting
           
       # Octopus Push Package
