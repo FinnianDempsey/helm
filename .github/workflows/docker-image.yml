@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: "${{ secrets.JFROG_USER }}/hello-world:${{github.run_number}}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}"
+        tags: "finnoctodocker/hello-world:${{github.run_number}}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}"
         
     # Octopus OIDC login
     - name: Login to Octopus Deploy
@@ -44,7 +44,7 @@ jobs:
       uses: OctopusDeploy/push-build-information-action@v3
       with:
         packages: 
-          "${{ secrets.JFROG_USER }}/hello-world"
+          "finnoctodocker/hello-world"
         version: "${{github.run_number}}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}"
         space: "Finn D"
         overwrite_mode: OverwriteExisting
