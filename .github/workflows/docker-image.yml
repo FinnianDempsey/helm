@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tags: "finnoctodocker/hello-world:${{github.run_number}}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}"
+        tags: "${{ secrets.JFROG_REPO }}/finnoctodocker/hello-world:${{github.run_number}}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}"
         file: ./docker-hello-world/Dockerfile
         
     # Octopus OIDC login
