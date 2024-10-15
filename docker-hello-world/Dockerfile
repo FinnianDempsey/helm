@@ -4,7 +4,7 @@ FROM alpine:latest
 RUN apk --no-cache add nginx
 
 # Copy custom HTML file to nginx's default directory
-COPY index.html /usr/share/nginx/html/index.html
+COPY ./index.html /usr/share/nginx/html/index.html
 
 # Expose port 80
 EXPOSE 80
