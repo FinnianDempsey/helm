@@ -31,6 +31,7 @@ jobs:
       with:
         push: true
         tags: "finnoctodocker/hello-world:${{github.run_number}}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}"
+        file: ./docker-hello-world/Dockerfile
         
     # Octopus OIDC login
     - name: Login to Octopus Deploy
